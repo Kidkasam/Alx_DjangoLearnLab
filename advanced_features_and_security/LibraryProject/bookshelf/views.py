@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import permission_required
 from .models import Book
 from django.db.models import Q
 
+from .forms import ExampleForm
+
 @permission_required('bookshelf.can_view', raise_exception=True)
 def book_list(request):
     books = Book.objects.all()
@@ -15,25 +17,25 @@ def book_list(request):
 @permission_required('bookshelf.can_create', raise_exception=True)
 def book_create(request):
     if request.method == 'POST':
-        # Rudimentary form handling for demonstration
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        year = request.POST.get('publication_year')
-        if title and author and year:
-            Book.objects.create(title=title, author=author, publication_year=year)
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('book_list')
-    return render(request, 'bookshelf/form_example.html', {'action': 'Create'})
+    else:
+        form = ExampleForm()
+    return render(request, 'bookshelf/form_example.html', {'form': form, 'action': 'Create'})
 
 @permission_required('bookshelf.can_edit', raise_exception=True)
 def book_edit(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
-        book.title = request.POST.get('title')
-        book.author = request.POST.get('author')
-        book.publication_year = request.POST.get('publication_year')
-        book.save()
-        return redirect('book_list')
-    return render(request, 'bookshelf/form_example.html', {'action': 'Edit', 'book': book})
+        form = ExampleForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
+    else:
+        form = ExampleForm(instance=book)
+    return render(request, 'bookshelf/form_example.html', {'form': form, 'action': 'Edit', 'book': book})
 
 @permission_required('bookshelf.can_delete', raise_exception=True)
 def book_delete(request, pk):
