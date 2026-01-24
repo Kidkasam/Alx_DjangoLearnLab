@@ -19,6 +19,9 @@ def verify():
 
     # Create user
     try:
+        if User.objects.filter(username='testuser').exists():
+            User.objects.get(username='testuser').delete()
+            print("Existing testuser deleted.")
         user = User.objects.create_user(username='testuser', email='test@example.com', password='password123', date_of_birth='2000-01-01')
         print(f"User created: {user.username}, DOB: {user.date_of_birth}")
     except Exception as e:
