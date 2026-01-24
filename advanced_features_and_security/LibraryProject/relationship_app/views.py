@@ -6,7 +6,7 @@ from .models import Library
 from django.contrib.auth import login
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
-from users.forms import CustomUserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import modelform_factory
 
 # Function-based view: List all books
@@ -43,13 +43,13 @@ class LibraryDetailView(DetailView):
 
 def register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST, request.FILES)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('relationship_app:list_books')
     else:
-        form = CustomUserCreationForm()
+        form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
 
 # RBAC Views and Checks
