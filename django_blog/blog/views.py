@@ -125,7 +125,7 @@ def search_posts(request):
     
     return render(request, 'blog/search_results.html', {'query': query, 'results': results})
 
-class TaggedPostListView(ListView):
+class PostByTagListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
