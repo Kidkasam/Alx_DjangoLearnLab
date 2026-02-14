@@ -16,5 +16,25 @@
     {% endif %}
 
     <a href="{% url 'posts' %}" class="btn">Back to Posts</a>
+
+    <hr>
+
+    <h3>Comments</h3>
+    {% if user.is_authenticated %}
+    <a href="{% url 'comment_create' post.pk %}" class="btn">Add Comment</a>
+    {% endif %}
+
+    {% for comment in post.comments.all %}
+    <div class="comment">
+        <p><strong>{{ comment.author.username }}</strong> on {{ comment.created_at|date:"F d, Y H:i" }}</p>
+        <p>{{ comment.content }}</p>
+        {% if user == comment.author %}
+        <a href="{% url 'comment_update' comment.pk %}">Edit</a> |
+        <a href="{% url 'comment_delete' comment.pk %}">Delete</a>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
 </div>
 {% endblock %}
