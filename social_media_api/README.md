@@ -9,6 +9,8 @@ A robust Social Media API built with Django and Django REST Framework.
 - User Profile management.
 - Post Management (CRUD).
 - Commenting system on posts.
+- User following system (Follow/Unfollow).
+- Dynamic activity feed showing posts from followed users.
 - Search functionality for posts (by title and content).
 - Pagination for posts and comments list views.
 
@@ -46,11 +48,14 @@ A robust Social Media API built with Django and Django REST Framework.
 - `POST /api/accounts/register/`: Register a new user. Returns a token.
 - `POST /api/accounts/login/`: Log in an existing user. Returns a token.
 - `GET/PUT/PATCH /api/accounts/profile/`: Retrieve or update the authenticated user's profile. (Requires Token Authentication)
+- `POST /api/accounts/follow/<int:user_id>/`: Follow a user.
+- `POST /api/accounts/unfollow/<int:user_id>/`: Unfollow a user.
 
 ### Posts & Comments
 - `GET /api/posts/`: List all posts (Paginated, Searchable).
 - `POST /api/posts/`: Create a new post.
 - `GET/PUT/PATCH/DELETE /api/posts/<id>/`: Retrieve, update, or delete a specific post.
+- `GET /api/posts/feed/`: View posts from people you follow.
 - `GET /api/comments/`: List all comments (Paginated).
 - `POST /api/comments/`: Create a new comment.
 - `GET/PUT/PATCH/DELETE /api/comments/<id>/`: Retrieve, update, or delete a specific comment.
