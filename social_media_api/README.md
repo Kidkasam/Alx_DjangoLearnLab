@@ -48,20 +48,20 @@ A robust Social Media API built with Django and Django REST Framework.
 - `GET/PUT/PATCH /api/accounts/profile/`: Retrieve or update the authenticated user's profile. (Requires Token Authentication)
 
 ### Posts & Comments
-- `GET /posts/`: List all posts (Paginated, Searchable).
-- `POST /posts/`: Create a new post.
-- `GET/PUT/PATCH/DELETE /posts/<id>/`: Retrieve, update, or delete a specific post.
-- `GET /comments/`: List all comments (Paginated).
-- `POST /comments/`: Create a new comment.
-- `GET/PUT/PATCH/DELETE /comments/<id>/`: Retrieve, update, or delete a specific comment.
+- `GET /api/posts/`: List all posts (Paginated, Searchable).
+- `POST /api/posts/`: Create a new post.
+- `GET/PUT/PATCH/DELETE /api/posts/<id>/`: Retrieve, update, or delete a specific post.
+- `GET /api/comments/`: List all comments (Paginated).
+- `POST /api/comments/`: Create a new comment.
+- `GET/PUT/PATCH/DELETE /api/comments/<id>/`: Retrieve, update, or delete a specific comment.
 
 ## Search and Filtering
 - You can search posts by title or content using the `search` query parameter:
-  `GET /posts/?search=keyword`
+  `GET /api/posts/?search=keyword`
 
 ## Pagination
 - Post and comment lists are paginated. You can navigate through pages using the `page` query parameter:
-  `GET /posts/?page=2`
+  `GET /api/posts/?page=2`
 
 ## User Model
 The `CustomUser` model extends Django's `AbstractUser` and includes:
