@@ -11,6 +11,8 @@ A robust Social Media API built with Django and Django REST Framework.
 - Commenting system on posts.
 - User following system (Follow/Unfollow).
 - Dynamic activity feed showing posts from followed users.
+- Liking and unliking system for posts.
+- Real-time notifications for follows, likes, and comments.
 - Search functionality for posts (by title and content).
 - Pagination for posts and comments list views.
 
@@ -56,9 +58,14 @@ A robust Social Media API built with Django and Django REST Framework.
 - `POST /api/posts/`: Create a new post.
 - `GET/PUT/PATCH/DELETE /api/posts/<id>/`: Retrieve, update, or delete a specific post.
 - `GET /api/posts/feed/`: View posts from people you follow.
+- `POST /api/posts/<int:pk>/like/`: Like a post.
+- `POST /api/posts/<int:pk>/unlike/`: Unlike a post.
 - `GET /api/comments/`: List all comments (Paginated).
 - `POST /api/comments/`: Create a new comment.
 - `GET/PUT/PATCH/DELETE /api/comments/<id>/`: Retrieve, update, or delete a specific comment.
+
+### Notifications
+- `GET /api/notifications/`: Fetch all notifications for the authenticated user.
 
 ## Search and Filtering
 - You can search posts by title or content using the `search` query parameter:
