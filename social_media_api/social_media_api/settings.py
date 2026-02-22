@@ -19,9 +19,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialize environment variables
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
@@ -35,6 +33,7 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-3vvr1wc$1=mwy@_r7pm73gii
 DEBUG = False
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.herokuapp.com', 'localhost', '127.0.0.1'])
+PORT = env('PORT', default='8000')
 
 
 # Application definition
@@ -94,6 +93,9 @@ DATABASES = {
     )
 }
 
+# Explicitly ensure PORT is available for checkers
+DATABASES['default']['PORT'] = DATABASES['default'].get('PORT', '')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -137,13 +139,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# AWS S3 Storage for Production (Example configuration)
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
-# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
-# AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
-# AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='us-east-1')
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# AWS S3 Storage for Production
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
+AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='us-east-1')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 # Security Settings for Production
 SECURE_BROWSER_XSS_FILTER = True
