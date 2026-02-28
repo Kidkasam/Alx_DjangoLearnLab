@@ -1,7 +1,7 @@
 # Deployment Documentation: Social Media API
 
 **Hosting Provider**: [Render](https://render.com)
-**Live URL**: https://social-media-api-xxxx.onrender.com *(update after deployment)*
+**Live URL**: https://alx-djangolearnlab-ya84.onrender.com
 **Repository**: https://github.com/your-username/Alx_DjangoLearnLab
 
 ---

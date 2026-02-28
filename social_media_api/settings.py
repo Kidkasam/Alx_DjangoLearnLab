@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-3vvr1wc$1=mwy@_r7pm73gii
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.herokuapp.com', '.onrender.com', 'localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.onrender.com', 'alx-djangolearnlab-ya84.onrender.com', 'localhost', '127.0.0.1'])
 PORT = env('PORT', default='8000')
 
 

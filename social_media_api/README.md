@@ -4,7 +4,7 @@ A robust Social Media API built with Django REST Framework, deployed to producti
 
 ## 🌐 Live URL
 
-> **https://social-media-api-xxxx.onrender.com** *(update this after deployment)*
+> **https://alx-djangolearnlab-ya84.onrender.com**
 
 ---
 

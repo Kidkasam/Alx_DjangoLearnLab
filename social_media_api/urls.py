@@ -16,8 +16,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def api_root(request):
+    return Response({
+        "message": "Welcome to the Social Media API",
+        "version": "1.0",
+        "endpoints": {
+            "register": "/api/accounts/register/",
+            "login": "/api/accounts/login/",
+            "profile": "/api/accounts/profile/",
+            "follow": "/api/accounts/follow/<user_id>/",
+            "unfollow": "/api/accounts/unfollow/<user_id>/",
+            "posts": "/api/posts/",
+            "feed": "/api/posts/feed/",
+            "comments": "/api/comments/",
+            "notifications": "/api/notifications/",
+            "admin": "/admin/",
+        }
+    })
 
 urlpatterns = [
+    path('', api_root, name='api-root'),
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/', include('posts.urls')),
